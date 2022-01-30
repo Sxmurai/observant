@@ -64,10 +64,8 @@ public class InventoryMove extends Check {
         // get the players movement data
         MovementData data = getAC().getMovementManager().getMovementData(player);
         if (data == null) {
-            player.sendMessage("Null data");
             return;
         } else {
-            player.sendMessage("Movespeed: " + data.moveSpeed);
             // if the move speed is greater than 0 and we're moving
             // however, we have to take into account if they are being attacked while in the inventory GUI
             // which without that extra check would flag a legit player
