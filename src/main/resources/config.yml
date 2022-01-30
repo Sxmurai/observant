@@ -1,0 +1,52 @@
+#
+# Configuration file for Observant version 1
+#
+
+version: 1
+
+# The exempt player UUIDs
+exempt:
+  - some uuid
+  - another uuid
+
+debug: true # If the flagging player should get debug statements
+
+checks:
+  combat:
+    range:
+      enabled: true
+      minDist: 3.2
+      violations: 0.3
+    raytrace:
+      enabled: true
+      violations: 0.5
+
+  moving:
+    noslow:
+      enabled: true
+      violations: 0.7
+    invmove:
+      enabled: true
+      violations: 0.4
+      ignoreCreative: true
+
+punishment:
+  cancelOnFlag: true # If to cancel the event whenever something is detected
+  brodcast:
+    enabled: true
+    message: A player in your game has been detected cheating!
+  defaultType: KICK # This can be NONE, KICK, BAN
+  specify: true # If the user should get a reason for their kick/ban on the disconnected screen
+
+  time:
+    ban:
+      violations:
+        first: 1d # This can be set as like 1y, 2d, or FOREVER for a perm ban
+        second: 1w
+        third: FOREVER
+
+    mute:
+      violations:
+        first: 10m
+        second: 6h
+        third: 1w

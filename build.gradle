@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+version = '1.0'
+group = 'me.sxmurai.observant'
+
+configurations {
+    embed
+    implementation.extendsFrom embed
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/public'
+    }
+    maven {
+        url = "https://repo.dmulloy2.net/repository/public/"
+    }
+}
+
+dependencies {
+    embed group: 'org.bukkit', name: 'bukkit', version: '1.12.2-R0.1-SNAPSHOT'
+    embed group: 'org.reflections', name: 'reflections', version: '0.10.2'
+    // embed group: 'com.comphenix.protocol', name: 'ProtocolLib', version: '4.7.0'
+}
+
+jar {
+    from(configurations.embed.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }) {
+        exclude 'dummyThing',
+                'LICENSE.txt',
+                'META-INF/MUMFREY.RSA',
+                'META-INF/maven/**',
+                'org/**/*.html'
+    }
+
+    manifest.attributes(
+            'Main-Class': 'me.sxmurai.observant.Observant'
+    )
+}
