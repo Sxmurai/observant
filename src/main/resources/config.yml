@@ -20,15 +20,20 @@ checks:
     raytrace:
       enabled: true
       violations: 0.5
+    criticals:
+      enabled: true
+      violations: 0.2
 
   moving:
     noslow:
       enabled: true
-      violations: 0.7
+      violations: 0.5
     invmove:
       enabled: true
       violations: 0.4
-      ignoreCreative: true
+    jesus:
+      enabled: true
+      violations: 0.5
 
 punishment:
   cancelOnFlag: true # If to cancel the event whenever something is detected

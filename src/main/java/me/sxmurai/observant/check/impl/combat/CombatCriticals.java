@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffectType;
 
-@Register(name = CheckType.COMBAT_CRITCALS, category = Category.MOVING, configPath = "checks.moving.criticals")
+@Register(name = CheckType.COMBAT_CRITCALS, category = Category.MOVING, configPath = "checks.combat.criticals")
 public class CombatCriticals extends Check {
     @EventHandler
     public void onPlayerCombat(EntityDamageByEntityEvent event) {
@@ -54,7 +54,7 @@ public class CombatCriticals extends Check {
             }
 
             // if we're over our violation threshold
-            if (violation.value >= 0.2) {
+            if (violation.value >= getMaxViolation()) {
                 getProfile(attacker).punish(PunishmentType.KICK, type);
             }
         }

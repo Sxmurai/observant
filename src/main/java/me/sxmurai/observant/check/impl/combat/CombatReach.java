@@ -43,18 +43,15 @@ public class CombatReach extends Check {
 
         // if the distance the player is attacking from is greater than reach (squared), we can add a violation
         if (DistanceUtil.getDistanceSq(attacker.getLocation(), victim.getLocation()) > reach * reach) {
-            // TODO: surrounded in an if statement if we should cancel if a violation happens
-            event.setCancelled(true);
+            event.setCancelled(shouldCancel());
 
             violation.value += 0.1;
 
-            // TODO: debug should be taken from the config
             debug(attacker, violation);
         }
 
         // if the violation value is over the threshold
-        // TODO: 0.3 should be a config value
-        if (violation.value >= 0.3) {
+        if (violation.value >= getMaxViolation()) {
             getProfile(attacker).punish(PunishmentType.KICK, type);
         }
     }
@@ -66,8 +63,7 @@ public class CombatReach extends Check {
      */
     private double getReachDistance(Player player) {
         // get our initial reach distance
-        // TODO: load from config
-        double initial = 3.3;
+        double initial = getCheckConfig().getDouble("minDist");
 
         // players in creative mode have an extended reach
         if (player.getGameMode().equals(GameMode.CREATIVE)) {

@@ -1,10 +1,13 @@
 package me.sxmurai.observant.check;
 
+import me.sxmurai.observant.Observant;
 import me.sxmurai.observant.profile.Profile;
 import me.sxmurai.observant.profile.punishment.PunishmentType;
 import me.sxmurai.observant.profile.violation.Violation;
 import me.sxmurai.observant.util.internal.Wrapper;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemorySection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -49,7 +52,35 @@ public class Check implements Wrapper, Listener {
      * @param violation The violation
      */
     public void debug(Player player, Violation violation) {
+        if (!Observant.getInstance().shouldDebug()) {
+            return;
+        }
+
         String prefix = ChatColor.RED + "[Observant] " + ChatColor.RESET;
         player.sendMessage(prefix + "(" + violation.getCheckName() + "): {amount=" + violation.value + ", flags=" + String.join(",", violation.getTags()) + "}");
+    }
+
+    /**
+     * Get this check's config path
+     * @return a ConfigurationSection that contains the configuration for this check
+     */
+    public ConfigurationSection getCheckConfig() {
+        return Observant.getInstance().getConfig().getConfigurationSection(configPath);
+    }
+
+    /**
+     * Get the max amount of violations set in the config
+     * @return the violation max amount
+     */
+    public double getMaxViolation() {
+        return getCheckConfig().getDouble("violations");
+    }
+
+    /**
+     * If we should cancel an event upon a flag
+     * @return if we should cancel
+     */
+    public boolean shouldCancel() {
+        return Observant.getInstance().getConfig().getBoolean("punishment.cancelOnFlag");
     }
 }

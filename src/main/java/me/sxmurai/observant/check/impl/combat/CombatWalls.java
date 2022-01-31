@@ -37,17 +37,14 @@ public class CombatWalls extends Check {
 
         // if the attacker cannot see the victim
         if (!attacker.hasLineOfSight(victim)) {
-            // TODO: surrounded in an if statement if we should cancel if a violation happens
-            event.setCancelled(true);
+            event.setCancelled(shouldCancel());
 
             violation.value += 0.1;
 
-            // TODO: debug should be taken from the config
             debug(attacker, violation);
         }
 
-        // TODO: 0.5 should be a config value
-        if (violation.value >= 0.5) {
+        if (violation.value >= getMaxViolation()) {
             getProfile(attacker).punish(PunishmentType.KICK, type);
         }
     }

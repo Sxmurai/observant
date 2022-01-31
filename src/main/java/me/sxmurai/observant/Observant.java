@@ -25,6 +25,11 @@ public class Observant extends JavaPlugin {
 
         getLogger().info("Loading Observant v" + VERSION);
 
+        // This will also create a config.yml if it has not been created already.
+        saveDefaultConfig();
+        reloadConfig();
+
+        getLogger().info("Loaded config. Config version: " + getConfig().getInt("version"));
 
         // dynamically load listeners
         int loaded = loadListeners();
@@ -78,6 +83,10 @@ public class Observant extends JavaPlugin {
 
     public MovementManager getMovementManager() {
         return movementManager;
+    }
+
+    public boolean shouldDebug() {
+        return getConfig().getBoolean("debug");
     }
 
     public static Observant getInstance() {

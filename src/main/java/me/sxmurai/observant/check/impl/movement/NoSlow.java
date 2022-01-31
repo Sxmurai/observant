@@ -48,8 +48,7 @@ public class NoSlow extends Check {
 
             // we cannot sprint while eating
             if (event.getPlayer().isSprinting()) {
-                // TODO: surrounded in an if statement if we should cancel if a violation happens
-                event.setCancelled(true);
+                event.setCancelled(shouldCancel());
 
                 violation.value += 0.1;
                 violation.addTag("sprinting");
@@ -63,10 +62,7 @@ public class NoSlow extends Check {
                     MovementValues.WALK_SLOWDOWN;
 
             if (data.moveSpeed > speed && data.moving && event.getPlayer().getNoDamageTicks() == 0) {
-                event.getPlayer().sendMessage(String.valueOf(data.moveSpeed));
-
-                // TODO: surrounded in an if statement if we should cancel if a violation happens
-                event.setCancelled(true);
+                event.setCancelled(shouldCancel());
 
                 violation.value += 0.1;
                 violation.addTag("speed");
@@ -78,7 +74,7 @@ public class NoSlow extends Check {
                 debug(event.getPlayer(), violation);
             }
 
-            if (violation.value >= 0.7) {
+            if (violation.value >= getMaxViolation()) {
                 getProfile(event.getPlayer()).punish(PunishmentType.KICK, type);
             }
         }

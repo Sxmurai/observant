@@ -52,8 +52,7 @@ public class InventoryMove extends Check {
 
         // if the player is somehow sprinting while in a gui
         if (player.isSprinting()) {
-            // TODO: surrounded in an if statement if we should cancel if a violation happens
-            event.setCancelled(true);
+            event.setCancelled(shouldCancel());
 
             violation.value += 0.1;
             violation.addTag("sprinting");
@@ -70,8 +69,7 @@ public class InventoryMove extends Check {
             // however, we have to take into account if they are being attacked while in the inventory GUI
             // which without that extra check would flag a legit player
             if (data.moveSpeed != 0.0 && data.moving && player.getNoDamageTicks() == 0) {
-                // TODO: surrounded in an if statement if we should cancel if a violation happens
-                event.setCancelled(true);
+                event.setCancelled(shouldCancel());
 
                 violation.value += 0.1;
                 violation.addTag("moving_nodamage");
@@ -81,12 +79,10 @@ public class InventoryMove extends Check {
         }
 
         if (debug) {
-            // TODO: debug should be taken from the config
             debug(player, violation);
         }
 
-        // TODO: 0.4 should be the config value
-        if (violation.value >= 0.4) {
+        if (violation.value >= getMaxViolation()) {
             getProfile(player).punish(PunishmentType.KICK, type);
         }
     }
