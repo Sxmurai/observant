@@ -63,6 +63,8 @@ public class NoSlow extends Check {
                     MovementValues.WALK_SLOWDOWN;
 
             if (data.moveSpeed > speed && data.moving && event.getPlayer().getNoDamageTicks() == 0) {
+                event.getPlayer().sendMessage(String.valueOf(data.moveSpeed));
+
                 // TODO: surrounded in an if statement if we should cancel if a violation happens
                 event.setCancelled(true);
 
