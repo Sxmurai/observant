@@ -22,7 +22,7 @@ public class CheckHandler implements Wrapper {
 
         // moving
         checks.put(CheckType.MOVEMENT_INVENTORY, new InventoryMove());
-        checks.put(CheckType.MOVEMENT_JESUS, new Jesus()); // TODO: finish
+        // checks.put(CheckType.MOVEMENT_JESUS, new Jesus()); // TODO: finish
         checks.put(CheckType.MOVEMENT_NOSLOW, new NoSlow()); // TODO: broken
 
         // world
