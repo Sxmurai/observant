@@ -1,4 +1,4 @@
-package me.sxmurai.observant.check.impl.movement;
+package me.sxmurai.observant.check.impl.movement.data;
 
 /**
  * Represents vanilla movement values

@@ -34,6 +34,9 @@ checks:
     jesus:
       enabled: true
       violations: 0.5
+    velocity:
+      enabled: true
+      violations: 0.1
 
 punishment:
   cancelOnFlag: true # If to cancel the event whenever something is detected

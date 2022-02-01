@@ -4,6 +4,7 @@ import me.sxmurai.observant.check.Category;
 import me.sxmurai.observant.check.Check;
 import me.sxmurai.observant.check.CheckType;
 import me.sxmurai.observant.check.Register;
+import me.sxmurai.observant.check.impl.movement.data.MovementValues;
 import me.sxmurai.observant.profile.move.MovementData;
 import me.sxmurai.observant.profile.punishment.PunishmentType;
 import me.sxmurai.observant.profile.violation.Violation;

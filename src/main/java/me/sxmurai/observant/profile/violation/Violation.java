@@ -50,6 +50,12 @@ public class Violation {
         return tags;
     }
 
+    public void reward(double amount) {
+        if (value - amount > 0.0) {
+            value -= amount;
+        }
+    }
+
     @Override
     public String toString() {
         return "Violation{" +
